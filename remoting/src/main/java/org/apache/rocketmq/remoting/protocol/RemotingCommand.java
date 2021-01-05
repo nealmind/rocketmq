@@ -327,6 +327,7 @@ public class RemotingCommand {
 
     public ByteBuffer encode() {
         // 1> header length size
+        //消息总长度
         int length = 4;
 
         // 2> header data length

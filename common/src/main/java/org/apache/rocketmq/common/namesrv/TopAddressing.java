@@ -86,6 +86,7 @@ public class TopAddressing {
                 log.error("fetch name server address exception", e);
             }
         }
+        
 
         if (verbose) {
             String errorMsg =

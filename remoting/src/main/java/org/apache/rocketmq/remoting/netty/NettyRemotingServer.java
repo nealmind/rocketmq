@@ -70,6 +70,9 @@ public class NettyRemotingServer extends NettyRemotingAbstract implements Remoti
     private final EventLoopGroup eventLoopGroupBoss;
     private final NettyServerConfig nettyServerConfig;
 
+    /**
+     * 回调处理线程池
+     */
     private final ExecutorService publicExecutor;
     private final ChannelEventListener channelEventListener;
 
@@ -232,6 +235,9 @@ public class NettyRemotingServer extends NettyRemotingAbstract implements Remoti
             throw new RuntimeException("this.serverBootstrap.bind().sync() InterruptedException", e1);
         }
 
+        /**
+         * 启动netty事件监听及处理线程
+         */
         if (this.channelEventListener != null) {
             this.nettyEventExecutor.start();
         }

@@ -63,20 +63,22 @@ public class NamesrvController {
     public NamesrvController(NamesrvConfig namesrvConfig, NettyServerConfig nettyServerConfig) {
         this.namesrvConfig = namesrvConfig;
         this.nettyServerConfig = nettyServerConfig;
+        //实例化KVConfigManager实例
         this.kvConfigManager = new KVConfigManager(this);
+        //主要是初始化保存topic，broker地址，集群地址，活跃broker，过滤服务等信息的hashMap
         this.routeInfoManager = new RouteInfoManager();
-        //netty连接监听，当有连接变化时，交给routeInfoManager处理，剔除无效broker连接
+        //netty连接监听，当有连接空闲时，交给routeInfoManager处理，剔除无效broker连接
         this.brokerHousekeepingService = new BrokerHousekeepingService(this);
         this.configuration = new Configuration(
             log,
             this.namesrvConfig, this.nettyServerConfig
         );
-        //保存配置信息到磁盘
+        //保存配置信息
         this.configuration.setStorePathFromConfig(this.namesrvConfig, "configStorePath");
     }
 
     public boolean initialize() {
-        //初始化kvConfigManager
+        //初始化kvConfigManager,从磁盘加载，首次返回null
         this.kvConfigManager.load();
         //初始化netty服务端
         this.remotingServer = new NettyRemotingServer(this.nettyServerConfig, this.brokerHousekeepingService);

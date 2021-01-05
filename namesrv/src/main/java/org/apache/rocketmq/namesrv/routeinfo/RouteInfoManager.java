@@ -538,7 +538,7 @@ public class RouteInfoManager {
                             this.topicQueueTable.entrySet().iterator();
                         while (itTopicQueueTable.hasNext()) {
                             Entry<String, List<QueueData>> entry = itTopicQueueTable.next();
-                            String topic = entry.getKey();
+                             String topic = entry.getKey();
                             List<QueueData> queueDataList = entry.getValue();
 
                             Iterator<QueueData> itQueueData = queueDataList.iterator();
