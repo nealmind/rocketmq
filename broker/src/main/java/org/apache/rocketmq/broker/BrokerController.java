@@ -884,6 +884,7 @@ public class BrokerController {
         if (!messageStoreConfig.isEnableDLegerCommitLog()) {
             startProcessorByHa(messageStoreConfig.getBrokerRole());
             handleSlaveSynchronize(messageStoreConfig.getBrokerRole());
+            //注册broker到namesrv
             this.registerBrokerAll(true, false, true);
         }
 
